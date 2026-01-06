@@ -41,7 +41,7 @@ if [ ! -d "$HOME/.local/share/chezmoi/.git" ]; then
     chezmoi init --apply --verbose https://github.com/mauriciomelo/dotfiles.git
 else
     # Update existing setup
-    chezmoi apply --verbose
+    chezmoi update --apply --verbose
 fi
 
 echo "✨ Setup complete! Please restart your terminal."
