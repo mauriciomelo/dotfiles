@@ -26,12 +26,12 @@ if ! command -v chezmoi &> /dev/null; then
 fi
 
 # 3. Verify KeePass file exists
-KDBX_PATH="$HOME/Sync/keys.kdbx"
-if [ ! -f "$KDBX_PATH" ]; then
-    echo "❌ Error: KeePass file not found at $KDBX_PATH"
-    echo "Please add it before running this script."
-    exit 1
-fi
+# KDBX_PATH="$HOME/Sync/keys.kdbx"
+# if [ ! -f "$KDBX_PATH" ]; then
+#     echo "❌ Error: KeePass file not found at $KDBX_PATH"
+#     echo "Please add it before running this script."
+#     exit 1
+# fi
 
 # 4. Initialize and Apply Dotfiles
 # This will prompt you for your KeePass Master Password during the apply phase

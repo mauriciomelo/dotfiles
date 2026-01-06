@@ -1,6 +1,6 @@
 #!/bin/bash
 
 
-
+# Brewfile hash: {{ include "Brewfile.tmpl" | sha256sum }}
 echo "📦 Running brew bundle..."
-brew bundle --global
+brew bundle install
