@@ -4,7 +4,7 @@ set -e # Exit on error
 
 echo "🚀 Starting MacBook Bootstrap..."
 
-# 1. Install Homebrew if not present
+# Install Homebrew if not present
 if ! command -v brew &> /dev/null; then
     echo "🍺 Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -19,21 +19,40 @@ else
     echo "✅ Homebrew already installed."
 fi
 
-# 2. Install chezmoi
+# Install chezmoi
 if ! command -v chezmoi &> /dev/null; then
     echo "🛠️ Installing chezmoi..."
     brew install chezmoi
 fi
 
-# 3. Verify KeePass file exists
-# KDBX_PATH="$HOME/Sync/keys.kdbx"
-# if [ ! -f "$KDBX_PATH" ]; then
-#     echo "❌ Error: KeePass file not found at $KDBX_PATH"
-#     echo "Please add it before running this script."
-#     exit 1
-# fi
+# Install bitwarden CLI
+if ! command -v bw &> /dev/null; then
+    echo "🔐 Installing Bitwarden CLI..."
+    brew install bitwarden-cli
 
-# 4. Initialize and Apply Dotfiles
+    # Configure Bitwarden
+    echo "🔒 Configuring Bitwarden..."
+    bw config server https://vault.bitwarden.eu
+fi
+
+
+# Login to Bitwarden if needed
+if ! bw login --check; then
+    echo "🔓 Logging into Bitwarden..."
+    export BW_SESSION=$(bw login --raw)
+fi
+
+ # Unlock Bitwarden if needed
+if ! bw unlock --check; then
+    echo "🔓 Unlocking Bitwarden..."
+    export BW_SESSION=$(bw unlock --raw)
+fi
+
+# Sync Bitwarden Vault
+bw sync
+
+
+# Initialize and Apply Dotfiles
 # This will prompt you for your KeePass Master Password during the apply phase
 echo "Applying configurations via chezmoi..."
 if [ ! -d "$HOME/.local/share/chezmoi/.git" ]; then
