@@ -28,16 +28,6 @@ else
     echo "✅ Oh My Zsh already installed."
 fi
 
-
-# Install nvm (only if not already installed)
-if [ ! -d "$HOME/.nvm" ]; then
-echo "🔧 Installing nvm..."
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-    nvm install --lts
-else
-    echo "✅ nvm already installed, skipping nvm installation."
-fi
-
 # Install chezmoi
 if ! command -v chezmoi &> /dev/null; then
     echo "🛠️ Installing chezmoi..."
