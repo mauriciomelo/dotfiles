@@ -94,6 +94,10 @@ on-mode-changed = []
     run = ['move-node-to-workspace T'] 
 
 [[on-window-detected]]
+    if.app-id = 'com.mitchellh.ghostty'
+    run = ['move-node-to-workspace T'] 
+
+[[on-window-detected]]
     if.app-id = 'com.microsoft.VSCode'
     run = ['move-node-to-workspace C'] 
 
